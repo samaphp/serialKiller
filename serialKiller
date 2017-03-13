@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+echo "[ Serial killer ]"
+echo "================="
+
+# List of processes that you want from serial killer to kill them.
+PROCESSES=("chrome" "firefox" "mysql")
+
+for i in ${PROCESSES[@]}; do
+  ps aux | grep $i | awk '{print $2}' |
+  while read pid
+    do
+      kill -9 $pid
+      echo "Process $pid has been killed."
+    done
+done
